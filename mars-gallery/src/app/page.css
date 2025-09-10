@@ -1,0 +1,259 @@
+:root {
+  --background: #1f1016;
+  --foreground: #f0f0f0;
+  --secondary: #241219;
+  --text-secondary: #8b8b8b;
+  --border: #333;
+  --primary: #ff512f;
+  --primary-dark: #ce492f;
+}
+
+.body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.header {
+  background: #1f101694;
+  backdrop-filter: blur(10px);
+  color: var(--foreground);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+}
+
+.header a {
+  text-decoration: none;
+  color: white;
+}
+
+.header svg {
+  color: var(--primary);
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.main-header {
+  margin-top: 78px;
+  background: linear-gradient(45deg, var(--background), #ff522f63);
+  border-bottom: 1px solid var(--border);
+  padding: 8rem 0 8rem 0;
+}
+
+.main-header a {
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  transition: all .3s ease;
+}
+
+.main-header a:hover {
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+  color: #fff !important;
+}
+
+#filters {
+  scroll-margin-top: 297px;
+}
+
+.filters {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+}
+
+.filter-search svg {
+  color: var(--primary);
+}
+
+.search-bar label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.search-bar input {
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: #fff !important;
+  transition: all .3s ease;
+}
+
+.search-bar input:focus {
+  background: var(--background);
+  border: 1px solid var(--primary);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.search-bar input::placeholder {
+  color: var(--foreground) !important;
+  opacity: 0.7;
+}
+
+.filter-options label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.filter-options input, .filter-options .dropdown-toggle {
+  background: var(--background) !important;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  font-size: 0.875rem !important;
+  transition: all .3s ease;
+}
+
+.filter-options input {
+  cursor: pointer;
+  outline: none;
+  padding: .375rem .75rem;
+}
+
+.filter-options input:hover {
+  border: 1px solid var(--primary);
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.filter-options .dropdown-toggle::after {
+  display: none;
+}
+
+.filter-options .dropdown-toggle:hover {
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.filter-options .dropdown-toggle:focus {
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
+.dropdown-menu {
+  background: var(--background) !important;
+  padding: .5rem !important;
+}
+
+.dropdown-menu li {
+  background: var(--background);
+}
+
+.dropdown-item {
+  color: white !important;
+  transition: all .3s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--primary) !important;
+}
+
+.filter-option {
+  width: 100%;
+}
+
+.spinner-border {
+  color: var(--primary) !important;
+}
+
+.card {
+  background: var(--secondary) !important;
+  border: 1px solid var(--border) !important;
+  transition: all .3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 .5rem 1rem #ff522f63;
+  border: 1px solid var(--primary) !important;
+}
+
+.card-title {
+  color: var(--primary) !important;
+}
+
+.card-subtitle {
+  color: var(--text-secondary) !important;
+  font-size: 0.875rem;
+}
+
+.card-text small {
+  font-weight: 500;
+}
+
+.card-text svg {
+  color: var(--primary);
+}
+
+.pagination .btn {
+  background: var(--background) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: .5rem 1rem;
+  transition: all .3s ease;
+}
+
+.pagination .btn:hover {
+  background: var(--primary) !important;
+  border: 1px solid var(--primary) !important;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+  color: #fff !important;
+}
+
+footer {
+  background: var(--background);
+  border-top: 1px solid var(--border);
+  color: var(--foreground);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.875rem;
+}
+
+.footer-header {
+  width: 400px;
+}
+
+.footer-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.social-icons a svg {
+  fill: var(--text-secondary);
+  transition: all .3s ease;
+}
+
+.social-icons a svg:hover {
+  fill: var(--primary);
+}
+
+.footer-explore a {
+  color: var(--text-secondary);
+  transition: all .3s ease;
+}
+
+.footer-explore a:hover {
+  color: var(--primary);
+}
+
+.footer-resources a {
+  color: var(--text-secondary);
+  transition: all .3s ease;
+}
+
+.footer-resources a:hover {
+  color: var(--primary);
+}
+
+.footer-logo svg {
+  color: var(--primary);
+}
+
+.footer-text {
+  color: var(--text-secondary);
+}
