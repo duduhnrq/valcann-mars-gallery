@@ -231,7 +231,7 @@ const MarsExplorer = () => {
             </div>
             <div className="filter-option d-flex flex-column">
               <label htmlFor="date-input" className="">
-                Selecionar Data:
+                Select a date:
               </label>
               <input
                 type="date"
@@ -406,7 +406,7 @@ const MarsExplorer = () => {
               closer to Earth through cutting-edge space exploration technology.
             </p>
             <div className="social-icons d-flex gap-2">
-              <a href="#" className="text-decoration-none">
+              <a href="https://github.com/duduhnrq/valcann-mars-gallery" target="_blank" className="text-decoration-none">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
