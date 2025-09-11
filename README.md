@@ -44,7 +44,7 @@ Para perguntas ou colaborações:
 
 - **Email**: eduardohnrque@gmail.com
 
-- **LinkedIn**: [Eduardo Henrique](www.linkedin.com/in/eduardo-hnrque)
+- **LinkedIn**: [Eduardo Henrique](https://www.linkedin.com/in/eduardo-hnrque)
 
 - **GitHub**: [duduhnrq](https://github.com/duduhnrq)
 
