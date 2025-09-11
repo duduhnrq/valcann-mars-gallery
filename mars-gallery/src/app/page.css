@@ -184,7 +184,7 @@
 .error-text {
     border: 1px solid;
     padding: 1rem;
-    width: 300px;
+    width: auto;
 }
 
 .card {
