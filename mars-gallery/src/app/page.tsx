@@ -38,15 +38,14 @@ const MarsExplorer = () => {
   const [hasMore, setHasMore] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const API_KEY = "FwBorDtfLprcbM7ioof9zfBopfeGR1AVsolRmdqi";
+  const API_KEY = process.env.NEXT_PUBLIC_NASA_API_KEY;
 
   useEffect(() => {
-    if (API_KEY === "FwBorDtfLprcbM7ioof9zfBopfeGR1AVsolRmdqi") {
-      setError(null);
-    } else {
+    if (!API_KEY) {
       setError("Please replace the API_KEY with your actual NASA API key.");
       return;
     }
+    setError(null);
 
     if (!selectedRover) {
       setPhotos([]);
