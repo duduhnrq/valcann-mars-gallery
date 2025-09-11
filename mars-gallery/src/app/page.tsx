@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 
 const rovers = [
   {
@@ -84,7 +85,7 @@ const MarsExplorer = () => {
     };
 
     fetchPhotos();
-  }, [selectedRover, selectedCamera, selectedDate, page]);
+  }, [selectedRover, selectedCamera, selectedDate, page, API_KEY]);
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -94,7 +95,6 @@ const MarsExplorer = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
-  const selectedRoverData = rovers.find((r) => r.name === selectedRover);
   const availableCameras =
     selectedRover && rovers.find((r) => r.name === selectedRover)
       ? rovers.find((r) => r.name === selectedRover)?.cameras || []
@@ -308,7 +308,7 @@ const MarsExplorer = () => {
             {filteredPhotos.map((photo) => (
               <div key={photo.id} className="col">
                 <div className="card h-100 text-white">
-                  <img
+                  <Image
                     src={photo.img_src}
                     className="card-img-top object-fit-cover"
                     style={{ height: "200px" }}
@@ -533,7 +533,7 @@ const MarsExplorer = () => {
         </div>
         <hr />
         <div className="footer-text text-center">
-          &copy; 2024 UniverseEx. Space exploration data powered by NASA's Mars
+          &copy; 2024 UniverseEx. Space exploration data powered by NASA&apos;s Mars
           Rover Photos API.
         </div>
       </footer>
