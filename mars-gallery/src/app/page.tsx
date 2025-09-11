@@ -311,7 +311,8 @@ const MarsExplorer = () => {
                   <Image
                     src={photo.img_src}
                     className="card-img-top object-fit-cover"
-                    style={{ height: "200px" }}
+                    width={250}
+                    height={200}
                     alt={`Mars Rover Photo taken by ${photo.rover.name}`}
                     loading="lazy"
                     onError={(e) =>
