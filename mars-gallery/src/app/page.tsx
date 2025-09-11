@@ -48,16 +48,23 @@ const MarsExplorer = () => {
       return;
     }
 
+    if (!selectedRover) {
+      setPhotos([]);
+      setError(null);
+      return;
+    }
+
     const fetchPhotos = async () => {
       setLoading(true);
       try {
         let url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${selectedRover}/photos?api_key=${API_KEY}&page=${page}`;
 
-        if (selectedCamera) {
-          url += `&camera=${selectedCamera}`;
-        }
         if (selectedDate) {
           url += `&earth_date=${selectedDate}`;
+        }
+
+        if (selectedCamera) {
+          url += `&camera=${selectedCamera}`;
         }
 
         const response = await fetch(url);
@@ -104,6 +111,15 @@ const MarsExplorer = () => {
     return roverMatch || cameraMatch;
   });
 
+  const clearFilters = () => {
+    setSelectedRover("");
+    setSelectedCamera("");
+    setSelectedDate("");
+    setSearchTerm("");
+    setPage(1);
+    setPhotos([]);
+  };
+
   return (
     <div className="body text-white d-flex flex-column min-vh-100">
       <header className="header container-fluid position-fixed p-4 shadow-sm text-center">
@@ -139,18 +155,26 @@ const MarsExplorer = () => {
 
       <main className="container my-5 flex-grow-1">
         <div className="filters p-4 rounded shadow-sm">
-          <div className="filter-search d-flex align-items-center gap-2 mb-4">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="bi bi-funnel"
-              viewBox="0 0 16 16"
+          <div className="filter-search d-flex justify-content-between align-items-center mb-4">
+            <div className="d-flex align-items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="bi bi-funnel"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+              </svg>
+              <h4 className="m-0">Filters & Search</h4>
+            </div>
+            <button
+              onClick={clearFilters}
+              className="clear-filters rounded p-2"
             >
-              <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
-            </svg>
-            <h4 className="m-0">Filters & Search</h4>
+              Clear Filters
+            </button>
           </div>
 
           <div className="search-bar mb-4">
@@ -175,15 +199,16 @@ const MarsExplorer = () => {
               <label htmlFor="missionDropdown">Select a rover:</label>
               <div className="dropdown rounded w-100">
                 <button
-                  className="btn text-white dropdown-toggle w-100 text-start"
+                  className="select-btn btn text-white dropdown-toggle w-100 text-start"
                   type="button"
                   id="missionDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  disabled={!selectedDate}
                 >
                   {selectedRover || "Choose a rover"}
                 </button>
-                <ul className="dropdown-menu" aria-labelledby="missionDropdown">
+                <ul className="dropdown-menu shadow" aria-labelledby="missionDropdown">
                   {rovers.map((rover) => (
                     <li key={rover.name}>
                       <button
@@ -204,11 +229,12 @@ const MarsExplorer = () => {
               <label htmlFor="cameraDropdown">Select a camera:</label>
               <div className="dropdown rounded w-100">
                 <button
-                  className="btn text-white dropdown-toggle w-100 text-start"
+                  className="select-btn btn text-white dropdown-toggle w-100 text-start"
                   type="button"
                   id="cameraDropdown"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  disabled={!selectedRover}
                 >
                   {selectedCamera || "Choose a camera"}
                 </button>
@@ -249,14 +275,33 @@ const MarsExplorer = () => {
 
         {loading && (
           <div className="d-flex flex-column justify-content-center text-center my-4">
-            <div className="spinner-border mb-2 m-auto" role="status">
-            </div>
-            <p className="text-center m-0">Loading photos...</p>
+            <div className="spinner-border mb-2 m-auto" role="status"></div>
+            <p className="loading-text text-center m-0">Loading photos...</p>
           </div>
         )}
-        {error && <p className="text-center my-4 text-danger">{error}</p>}
+        {error && (
+          <p className="error-text rounded text-center my-4 text-danger d-flex align-items-center justify-content-center gap-2 m-auto">
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 13V8m0 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+            {error}
+          </p>
+        )}
         {!loading && !error && filteredPhotos.length === 0 && (
-          <p className="text-center my-4">No photos found.</p>
+          <p className="loading-text text-center my-4">No photos found.</p>
         )}
 
         <div className="gallery mt-4" id="gallery">
@@ -292,9 +337,9 @@ const MarsExplorer = () => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
                           />
                         </svg>
@@ -313,14 +358,14 @@ const MarsExplorer = () => {
                         >
                           <path
                             stroke="currentColor"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M4 18V8a1 1 0 0 1 1-1h1.5l1.707-1.707A1 1 0 0 1 8.914 5h6.172a1 1 0 0 1 .707.293L17.5 7H19a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"
                           />
                           <path
                             stroke="currentColor"
-                            stroke-linejoin="round"
-                            stroke-width="2"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                           />
                         </svg>
@@ -406,7 +451,11 @@ const MarsExplorer = () => {
               closer to Earth through cutting-edge space exploration technology.
             </p>
             <div className="social-icons d-flex gap-2">
-              <a href="https://github.com/duduhnrq/valcann-mars-gallery" target="_blank" className="text-decoration-none">
+              <a
+                href="https://github.com/duduhnrq/valcann-mars-gallery"
+                target="_blank"
+                className="text-decoration-none"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
